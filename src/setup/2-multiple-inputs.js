@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+// JS
+// const input = document.getElementById('myText');
+// const inputValue = input.value
+// React
+// value, onChange
 
 const ControlledInputs = () => {
   const [firstName, setFirstName] = useState('');
@@ -43,7 +48,7 @@ const ControlledInputs = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-           <div className='form-control'>
+          <div className='form-control'>
             <label htmlFor='email'>Email : </label>
             <input
               type='email'
@@ -52,7 +57,7 @@ const ControlledInputs = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-           </div>
+          </div>
           <button type='submit'>add person</button>
         </form>
  

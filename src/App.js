@@ -14,7 +14,7 @@ import UseStateObject from './setup/UseStateObject';
 function App() {
   return (
     <div className='container'>
-         {/* <UseEffectFetchData /> */}
+        <ControlledInputs/>
     </div>
   );
 }
