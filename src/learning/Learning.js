@@ -1,37 +1,35 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import {data} from '../data'
 
-const url = 'https://api.github.com/users';
+
 const Learning = () => {
-   const [users, setUsers] = useState([]);
-   
-   const getUsers = async() => {
-     const response = await fetch(url);
-     const users = await response.json();
-     setUsers(users)
-    //  console.log(users)
-   }
-    useEffect(()=> {
-       getUsers();
-   }, []);
+  const [people, setPeople] = useState(data);
+  const removePerson = (id) => {
+     setPeople((people) => {
+        return people.filter((person) => person.id !== id);
+     });
+  }
   return (
-    <>
-      <h3>Github user</h3>
-      <ul className='users'>
-          {users.map((user) =>{
-            const {id, login, avatar_url, html_url} = user;
-            return (
-               <li key={id}>
-                  <img src={avatar_url} alt={login}/>
-                  <div>
-                     <h4>{login}</h4>
-                     <a href={html_url}>profile</a>
-                  </div>
-               </li>
-            )
-          })}
-      </ul>
-    </>
+       <section>
+         <List people={people} removePerson={removePerson}/>
+       </section>
   )
+}
+
+const List = ({people, removePerson}) => {
+   return <>
+      {people.map((person) =>{
+         return <SinglePerson key={person.id} {...person} removePerson={removePerson} />
+      })}
+   </>
+}
+
+
+const SinglePerson = ({id, name, removePerson}) =>{
+   return <div className='item'>
+      <h4>{name}</h4>
+      <button onClick={()=> removePerson(id)}>remove</button>
+   </div>
 }
 
 export default Learning
